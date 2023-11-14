@@ -106,12 +106,19 @@ extension DescriptionPackage {
 
     private func targetsToBuild() throws -> Set<ResolvedTarget> {
         switch mode {
-        case .createPackage:
+        case .createPackage(.all):
             // In create mode, all products should be built
             // In future update, users will be enable to specify products want to build
             let rootPackage = try fetchRootPackage()
             let productsToBuild = rootPackage.products
             return Set(productsToBuild.flatMap(\.targets))
+            
+        case .createPackage(.custom(let targets)):
+            let productsToBuild = graph.rootPackages.first?
+                .products
+                .filter { targets.contains($0.name) } ?? []
+            return Set(productsToBuild.flatMap(\.targets))
+            
         case .prepareDependencies:
             // In prepare mode, all targets should be built
             // In future update, users will be enable to specify targets want to build

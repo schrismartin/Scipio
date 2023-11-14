@@ -8,9 +8,14 @@ public typealias PlatformMatrix = [String: Set<SDK>]
 public struct Runner {
     private let options: Options
     private let fileSystem: any FileSystem
+    
+    public enum BuildProducts {
+        case all
+        case custom(Set<String>)
+    }
 
     public enum Mode {
-        case createPackage
+        case createPackage(BuildProducts)
         case prepareDependencies
     }
 

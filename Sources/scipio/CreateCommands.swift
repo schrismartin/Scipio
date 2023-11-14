@@ -29,9 +29,19 @@ extension Scipio {
             } else {
                 platformSpecifier = .specific(Set(platforms))
             }
+            
+            let products = Set(
+                buildOptions.products
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .split(separator: ",")
+                    .map(String.init)
+            )
 
             let runner = Runner(
-                commandType: .create(platformSpecifier: platformSpecifier),
+                commandType: .create(
+                    platformSpecifier: platformSpecifier,
+                    products: products.isEmpty ? .all : .custom(products)
+                ),
                 buildOptions: buildOptions,
                 globalOptions: globalOptions
             )

@@ -46,7 +46,7 @@ final class DescriptionPackageTests: XCTestCase {
 
     func testBuildProductsInCreateMode() throws {
         let rootPath = fixturePath.appendingPathComponent("BinaryPackage")
-        let package = try XCTUnwrap(try DescriptionPackage(packageDirectory: rootPath.absolutePath, mode: .createPackage))
+        let package = try XCTUnwrap(try DescriptionPackage(packageDirectory: rootPath.absolutePath, mode: .createPackage(.all)))
         XCTAssertEqual(package.name, "BinaryPackage")
 
         XCTAssertEqual(

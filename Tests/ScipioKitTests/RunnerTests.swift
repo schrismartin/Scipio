@@ -80,7 +80,7 @@ final class RunnerTests: XCTestCase {
 
     func testBuildClangPackage() async throws {
         let runner = Runner(
-            mode: .createPackage,
+            mode: .createPackage(.all),
             options: .init(
                 baseBuildOptions: .init(isSimulatorSupported: false)
             )
@@ -129,7 +129,7 @@ final class RunnerTests: XCTestCase {
 
     func testBuildClangPackageWithCustomModuleMap() async throws {
         let runner = Runner(
-            mode: .createPackage,
+            mode: .createPackage(.all),
             options: .init(
                 baseBuildOptions: .init(isSimulatorSupported: false)
             )
@@ -267,7 +267,7 @@ final class RunnerTests: XCTestCase {
 
     func testExtractBinary() async throws {
         let runner = Runner(
-            mode: .createPackage,
+            mode: .createPackage(.all),
             options: .init(
                 baseBuildOptions: .init(
                     buildConfiguration: .release,
@@ -439,7 +439,7 @@ final class RunnerTests: XCTestCase {
 
     func testWithResourcePackage() async throws {
         let runner = Runner(
-            mode: .createPackage,
+            mode: .createPackage(.all),
             options: .init(
                 baseBuildOptions: .init(
                     platforms: .specific([.iOS]),

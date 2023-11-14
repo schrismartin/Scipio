@@ -20,6 +20,10 @@ struct BuildOptionGroup: ParsableArguments {
     @Flag(name: .customLong("embed-debug-symbols"),
           help: "Whether embed debug symbols to frameworks or not.")
     var embedDebugSymbols = false
+    
+    @Option(name: [.customShort("p"), .customLong("products")],
+            help: "Comma-separated set of products to build")
+    var products: String = ""
 
     @Flag(name: .customLong("support-simulators"),
           help: "Whether also building for simulators of each SDKs or not.")

@@ -2,13 +2,13 @@ import Foundation
 import ScipioKit
 
 enum CommandType {
-    case create(platformSpecifier: Runner.Options.PlatformSpecifier)
+    case create(platformSpecifier: Runner.Options.PlatformSpecifier, products: Runner.BuildProducts)
     case prepare(cacheMode: Runner.Options.CacheMode)
 
     var mode: Runner.Mode {
         switch self {
-        case .create:
-            return .createPackage
+        case .create(_, let products):
+            return .createPackage(products)
         case .prepare:
             return .prepareDependencies
         }
@@ -16,7 +16,7 @@ enum CommandType {
 
     var platformSpecifier: Runner.Options.PlatformSpecifier {
         switch self {
-        case .create(let platform):
+        case .create(let platform, _):
             return platform
         case .prepare:
             return .manifest
